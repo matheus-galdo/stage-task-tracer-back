@@ -20,14 +20,6 @@ export default class ProcessController {
         this.processService = new ProcessService(this.processRepository, this.areaService);
     }
 
-    public async index(req: Request, res: Response) {
-        const id = Number(req.params.id);
-        
-        const processs = await this.processService.getProcessesByAreaId(id);
-        console.log(processs);
-        return res.send(processs);
-    }
-
     public async create(req: Request, res: Response) {
         const process = req.body as Process;
         console.log(process);

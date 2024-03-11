@@ -17,6 +17,14 @@ export default class AreaController {
         return res.send(areas);
     }
 
+    public async getProcesses(req: Request, res: Response) {
+        const id = Number(req.params.id);
+        
+        const processs = await this.areaService.findAreaById(id);
+        console.log(processs);
+        return res.send(processs);
+    }
+
     public async create(req: Request, res: Response) {
         const area = req.body as Area;
         const areaCreated = await this.areaService.create(area);
