@@ -8,10 +8,8 @@ export default class ProcessService {
         private areaService: AreaService
     ) { }
 
-    public async getProcessesByAreaId(title: string){
-        const area = await this.areaService.findAreaByTitle(title);
-        
-        return this.processRepository.getProcesses(area.id);
+    public async getProcessesByAreaId(id: number){        
+        return this.areaService.findAreaById(id);        
     }
 
     public create(process: Process){

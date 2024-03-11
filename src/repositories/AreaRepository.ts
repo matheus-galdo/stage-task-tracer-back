@@ -6,8 +6,17 @@ export default class AreaRepository {
         return prisma.area.findMany();
     }
 
+    public findAreaWithProcess(id: number) {
+        return prisma.area.findUnique({
+            where: { id },
+            include: { processes: true }
+        }
+        );
+    }
+
+
     public findAreaByTitle(title: string) {
-        return prisma.area.findUnique({where: {title}});
+        return prisma.area.findUnique({ where: { title } });
     }
 
     public create(area: Area) {

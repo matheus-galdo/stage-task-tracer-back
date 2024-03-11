@@ -14,6 +14,10 @@ export default class AreaService {
         return this.areaRepository.findAreaByTitle(title);
     }
 
+    public findAreaById(id: number) {
+        return this.areaRepository.findAreaWithProcess(id);
+    }
+
     public create(area: Area){
         return this.areaRepository.create(area);
     }

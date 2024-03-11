@@ -21,14 +21,18 @@ export default class ProcessController {
     }
 
     public async index(req: Request, res: Response) {
-        const { title } = req.params;
-        const processs = await this.processService.getProcessesByAreaId(title);
+        const id = Number(req.params.id);
+        
+        const processs = await this.processService.getProcessesByAreaId(id);
+        console.log(processs);
         return res.send(processs);
     }
 
     public async create(req: Request, res: Response) {
-        const processs = req.body as Process;
-        const processCreated = await this.processService.create(processs);
+        const process = req.body as Process;
+        console.log(process);
+        
+        const processCreated = await this.processService.create(process);
         return res.send(processCreated);
     }
 }
