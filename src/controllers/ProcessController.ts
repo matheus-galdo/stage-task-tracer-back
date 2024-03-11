@@ -22,9 +22,13 @@ export default class ProcessController {
 
     public async create(req: Request, res: Response) {
         const process = req.body as Process;
-        console.log(process);
-        
         const processCreated = await this.processService.create(process);
         return res.send(processCreated);
+    }
+
+    public async delete(req: Request, res: Response) {
+        const id = Number(req.params.id);
+        const process = await this.processService.delete(id);
+        return res.send(process);
     }
 }

@@ -11,4 +11,15 @@ export default class ProcessService {
     public create(process: Process){
         return this.processRepository.create(process);
     }
+
+    public delete(id: number){
+        const process = this.processRepository.find(id);
+
+        if (process) {
+            return this.processRepository.delete(id);
+        }
+
+        throw new Error('Processo inexistente');
+    }
+    
 }
