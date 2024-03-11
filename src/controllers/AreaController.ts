@@ -1,4 +1,4 @@
-import { Area } from "@/contracts/Entities";
+import { Area } from "@/interfaces/Entities";
 import AreaRepository from "@/repositories/AreaRepository";
 import AreaService from "@/services/AreaService";
 import { Request, Response } from "express";

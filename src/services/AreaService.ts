@@ -1,4 +1,4 @@
-import { Area } from "@/contracts/Entities";
+import { Area } from "@/interfaces/Entities";
 import AreaRepository from "@/repositories/AreaRepository";
 
 export default class AreaService {
@@ -8,6 +8,10 @@ export default class AreaService {
 
     public getAreas(){
         return this.areaRepository.getAreas();
+    }
+
+    public findAreaByTitle(title: string) {
+        return this.areaRepository.findAreaByTitle(title);
     }
 
     public create(area: Area){
