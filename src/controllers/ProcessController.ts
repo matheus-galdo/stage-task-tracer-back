@@ -26,6 +26,14 @@ export default class ProcessController {
         return res.send(processCreated);
     }
 
+    public async update(req: Request, res: Response) {
+        const id = Number(req.params.id);
+        const process = req.body as Process;
+
+        const updatedProcess = await this.processService.update(id, process);
+        return res.send(updatedProcess);
+    }
+
     public async delete(req: Request, res: Response) {
         const id = Number(req.params.id);
         const process = await this.processService.delete(id);

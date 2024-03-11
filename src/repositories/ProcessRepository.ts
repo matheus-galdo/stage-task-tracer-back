@@ -9,12 +9,12 @@ export default class ProcessRepository {
     public delete(id: number) {
         return prisma.process.delete({ where: { id }});
     }
-    
-    public getProcesses(areaId: number) {
-        return prisma.process.findMany({ where: { areaId }});
-    }
 
     public create(process: Process) {
         return prisma.process.create({ data: process });
+    }
+
+    public update(process: Process, id: number) {
+        return prisma.process.update({ where: { id }, data: process});
     }
 }

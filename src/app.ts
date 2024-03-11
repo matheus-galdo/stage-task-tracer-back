@@ -4,6 +4,7 @@ import 'express-async-errors';
 import httpStatus from 'http-status';
 import areaRouter from './routers/areaRouter';
 import processRouter from './routers/processRouter';
+import { ErrorHandlerMiddleware } from './middlewares/ErrorHandlerMiddleware';
 
 const app = express();
 
@@ -16,5 +17,6 @@ app.get('/health', (req: Request, res: Response) => {
 
 app.use("/areas", areaRouter);
 app.use("/processes", processRouter);
+app.use(ErrorHandlerMiddleware);
 
 export default app;

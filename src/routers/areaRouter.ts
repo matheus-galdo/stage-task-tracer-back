@@ -1,4 +1,7 @@
 import AreaController from '@/controllers/AreaController';
+import { validateRequestBody, validateRequestParams } from '@/middlewares/RequestValidationMiddleware';
+import { areaSchema } from '@/schemas/areaSchema';
+import { paramsIdSchema } from '@/schemas/commonSchemas';
 import express from 'express';
 
 const areaRouter = express.Router();
@@ -6,7 +9,7 @@ const controller = new AreaController();
 
 areaRouter
     .get('/', controller.index.bind(controller))
-    .get('/:id/processes', controller.getProcesses.bind(controller))
-    .post('/', controller.create.bind(controller));
-    
+    .get('/:id/processes', validateRequestParams(paramsIdSchema), controller.getProcesses.bind(controller))
+    .post('/', validateRequestBody(areaSchema), controller.create.bind(controller));
+
 export default areaRouter;
