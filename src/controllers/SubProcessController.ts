@@ -5,7 +5,7 @@ import AreaService from "@/services/AreaService";
 import ProcessService from "@/services/ProcessService";
 import { Request, Response } from "express";
 
-export default class ProcessController {
+export default class SubProcessController {
     public processRepository: ProcessRepository;
     public processService: ProcessService;
 
@@ -20,7 +20,7 @@ export default class ProcessController {
         this.processService = new ProcessService(this.processRepository, this.areaService);
     }
 
-    public async getProcesses(req: Request, res: Response) {
+    public async getSubProcesses(req: Request, res: Response) {
         const id = Number(req.params.id);
         const processs = await this.processService.findProcessById(id);
         return res.send(processs);

@@ -1,7 +1,7 @@
 import { Process } from "@/interfaces/Entities";
 import { prisma } from "@/database";
 
-export default class ProcessRepository {
+export default class SubProcessRepository {
     public find(id: number) {
         return prisma.process.findUnique({ where: { id } });
     }

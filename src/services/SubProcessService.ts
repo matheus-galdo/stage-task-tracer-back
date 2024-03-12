@@ -2,7 +2,7 @@ import { Process } from "@/interfaces/Entities";
 import ProcessRepository from "@/repositories/ProcessRepository";
 import AreaService from "./AreaService";
 
-export default class ProcessService {
+export default class SubProcessService {
     constructor(
         private processRepository: ProcessRepository,
         private areaService: AreaService

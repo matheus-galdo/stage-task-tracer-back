@@ -10,10 +10,8 @@ export default class AreaRepository {
         return prisma.area.findUnique({
             where: { id },
             include: { processes: true }
-        }
-        );
+        });
     }
-
 
     public findAreaByTitle(title: string) {
         return prisma.area.findUnique({ where: { title } });
