@@ -1,27 +1,26 @@
-import { Process } from "@/interfaces/Entities";
+import { SubProcess } from "@/interfaces/Entities";
 import { prisma } from "@/database";
 
 export default class SubProcessRepository {
     public find(id: number) {
-        return prisma.process.findUnique({ where: { id } });
+        return prisma.subProcess.findUnique({ where: { id } });
     }
 
-    public async findProcessWithSubProcesses(id: number) {
-        return prisma.process.findUnique({
+    public async findSubProcessesById(id: number) {
+        return prisma.subProcess.findUnique({
             where: { id },
-            include: { subProcesses: true, area: true }
         });
     }
 
     public delete(id: number) {
-        return prisma.process.delete({ where: { id } });
+        return prisma.subProcess.delete({ where: { id } });
     }
 
-    public create(process: Process) {
-        return prisma.process.create({ data: process });
+    public create(subProcess: SubProcess) {
+        return prisma.subProcess.create({ data: subProcess });
     }
 
-    public update(process: Process, id: number) {
-        return prisma.process.update({ where: { id }, data: process });
+    public update(subProcess: SubProcess, id: number) {
+        return prisma.subProcess.update({ where: { id }, data: subProcess });
     }
 }

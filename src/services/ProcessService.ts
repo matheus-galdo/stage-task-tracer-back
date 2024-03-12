@@ -21,9 +21,9 @@ export default class ProcessService {
         return this.processRepository.create(process);
     }
 
-    public update(id: number, process: Process){
-        const existingProcess = this.processRepository.find(id);
-        const area = this.areaService.findAreaById(process.areaId);
+    public async update(id: number, process: Process){
+        const existingProcess = await this.processRepository.find(id);
+        const area = await this.areaService.findAreaById(process.areaId);
         
         const processNameAlreadyTaken = this.processRepository.find(id);
         //achar pelo nome

@@ -1,56 +1,56 @@
-import { Process } from "@/interfaces/Entities";
-import ProcessRepository from "@/repositories/ProcessRepository";
-import AreaService from "./AreaService";
+import { SubProcess } from "@/interfaces/Entities";
+import SubProcessRepository from "@/repositories/SubProcessRepository";
+import ProcessService from "./ProcessService";
 
 export default class SubProcessService {
     constructor(
-        private processRepository: ProcessRepository,
-        private areaService: AreaService
+        private subProcessRepository: SubProcessRepository,
+        private processService: ProcessService,
     ) { }
 
-    public findProcessById(id: number) {
-        return this.processRepository.findProcessWithSubProcesses(id);
+    public findSubProcessById(id: number) {
+        return this.subProcessRepository.findSubProcessesById(id);
     }
 
-    public create(process: Process){
-        const area = this.areaService.findAreaById(process.areaId);
-        if (!area) {
-            throw new Error('Área inexistente');
-        }
-
-        return this.processRepository.create(process);
-    }
-
-    public update(id: number, process: Process){
-        const existingProcess = this.processRepository.find(id);
-        const area = this.areaService.findAreaById(process.areaId);
-        
-        const processNameAlreadyTaken = this.processRepository.find(id);
-        //achar pelo nome
-
-        if (!existingProcess) {
-            throw new Error('Processo inexistente');
-        }
-
-        if (!area) {
-            throw new Error('Área inexistente');
-        }
-
-        if (!processNameAlreadyTaken) {
-            throw new Error('Nome de Processo já está em uso');
-        }
-
-        return this.processRepository.update(process, id);
-    }
-
-    public delete(id: number){
-        const process = this.processRepository.find(id);
-
+    public create(subProcess: SubProcess) {
+        const process = this.processService.findProcessById(subProcess.processId);
         if (!process) {
             throw new Error('Processo inexistente');
         }
-        
-        return this.processRepository.delete(id);
+
+        return this.subProcessRepository.create(subProcess);
     }
-    
+
+    public async update(id: number, subProcess: SubProcess) {
+        console.log('aqui', {subProcess});
+        
+        const existingSubProcess = await this.subProcessRepository.find(id);
+        const process = await this.processService.findProcessById(existingSubProcess.processId);
+
+        const processNameAlreadyTaken = this.subProcessRepository.find(id);
+
+        if (!existingSubProcess) {
+            throw new Error('Sub processo inexistente');
+        }
+
+        if (!process) {
+            throw new Error('processo inexistente');
+        }
+
+        if (!processNameAlreadyTaken) {
+            throw new Error('Nome de sub processo já está em uso');
+        }
+
+        return this.subProcessRepository.update(subProcess, id);
+    }
+
+    public delete(id: number) {
+        const subProcess = this.subProcessRepository.find(id);
+
+        if (!subProcess) {
+            throw new Error('Sub processo inexistente');
+        }
+
+        return this.subProcessRepository.delete(id);
+    }
 }
