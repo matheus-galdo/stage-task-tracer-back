@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "prebuild": "npx prisma migrate dev",
     "build": "tsc --project tsconfig.json && tsc-alias",
     "dev": "ts-node-dev -r tsconfig-paths/register src/server.ts",
     "start": "prisma migrate deploy && node dist/server.js",
