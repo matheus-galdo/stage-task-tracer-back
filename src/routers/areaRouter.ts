@@ -10,6 +10,8 @@ const controller = new AreaController();
 areaRouter
     .get('/', controller.index.bind(controller))
     .get('/:id/processes', validateRequestParams(paramsIdSchema), controller.getProcesses.bind(controller))
-    .post('/', validateRequestBody(areaSchema), controller.create.bind(controller));
+    .post('/', validateRequestBody(areaSchema), controller.create.bind(controller))
+    .put('/:id', validateRequestParams(paramsIdSchema), validateRequestBody(areaSchema), controller.update.bind(controller))
+    .delete('/:id', validateRequestParams(paramsIdSchema), controller.delete.bind(controller));
 
 export default areaRouter;

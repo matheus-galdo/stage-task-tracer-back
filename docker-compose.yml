@@ -1,11 +1,12 @@
 services:
   postgres:
     image: postgres
-    container_name: postgres
+    container_name: task-tracer-db
     ports:
       - 5433:5432
     environment:
       - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=task-tracer
     networks:
       - task_tracer_network
     volumes:
@@ -13,8 +14,8 @@ services:
 
   back-end:
     container_name: task_tracer_api
-    env_file:
-      - .env
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@task-tracer-db:5432/task-tracer-db?schema=public
     build: .
     ports:
       - 3000:3000

@@ -62,7 +62,7 @@ export default class ProcessService {
         const existingProcess = await this.processRepository.find(id);
         const area = await this.areaService.findAreaById(process.areaId);
 
-        const processNameAlreadyTaken = this.processRepository.find(id);
+        const processNameAlreadyTaken = await this.processRepository.find(id);
 
         if (!existingProcess) {
             throw new Error('Processo inexistente');
@@ -72,7 +72,7 @@ export default class ProcessService {
             throw new Error('Área inexistente');
         }
 
-        if (!processNameAlreadyTaken) {
+        if (processNameAlreadyTaken) {
             throw new Error('Nome de Processo já está em uso');
         }
 

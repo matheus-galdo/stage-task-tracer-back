@@ -28,4 +28,18 @@ export default class AreaController {
         const areaCreated = await this.areaService.create(area);
         return res.send(areaCreated);
     }
+
+    public async update(req: Request, res: Response) {
+        const id = Number(req.params.id);
+        const area = req.body as Area;
+
+        const updatedArea = await this.areaService.update(id, area);
+        return res.send(updatedArea);
+    }
+
+    public async delete(req: Request, res: Response) {
+        const id = Number(req.params.id);
+        const area = await this.areaService.delete(id);
+        return res.send(area);
+    }
 }
