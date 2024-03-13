@@ -15,7 +15,7 @@ services:
   back-end:
     container_name: task_tracer_api
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@task-tracer-db:5432/task-tracer-db?schema=public
+      - DATABASE_URL=${DATABASE_URL}
     build: .
     ports:
       - 3000:3000
