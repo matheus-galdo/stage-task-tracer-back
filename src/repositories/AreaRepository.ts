@@ -6,10 +6,10 @@ export default class AreaRepository {
         return prisma.area.findMany();
     }
 
-    public findAreaWithProcess(id: number) {
+    public findAreaWithRootProcesses(id: number) {
         return prisma.area.findUnique({
             where: { id },
-            include: { processes: true }
+            include: { processes: { where: { isProcessRoot: true } } }
         });
     }
 

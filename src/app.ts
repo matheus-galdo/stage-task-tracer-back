@@ -5,7 +5,6 @@ import httpStatus from 'http-status';
 import areaRouter from './routers/areaRouter';
 import processRouter from './routers/processRouter';
 import { ErrorHandlerMiddleware } from './middlewares/ErrorHandlerMiddleware';
-import subProcessRouter from './routers/subProcessRouter';
 
 const app = express();
 
@@ -18,7 +17,6 @@ app.get('/health', (req: Request, res: Response) => {
 
 app.use("/areas", areaRouter);
 app.use("/processes", processRouter);
-app.use("/sub-processes", subProcessRouter);
 app.use(ErrorHandlerMiddleware);
 
 export default app;

@@ -26,16 +26,11 @@ model Process {
   areaId      Int
   description String?
 
-  area Area @relation(fields: [areaId], references: [id])
-  subProcesses SubProcess[]
+  parentId          Int?
+  childProcessOrder Int     @default(1)
+  isProcessRoot     Boolean @default(false)
 
-}
-
-model SubProcess {
-  id     Int    @id @default(autoincrement())
-  name   String
-  processId Int
-  description String?
-
-  area Process @relation(fields: [processId], references: [id])
+  area        Area?     @relation(fields: [areaId], references: [id])
+  parent_node Process?  @relation("ParentChild", fields: [parentId], references: [id])
+  children    Process[] @relation("ParentChild")
 }

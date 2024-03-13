@@ -9,7 +9,7 @@ export default class ProcessRepository {
     public async findProcessWithSubProcesses(id: number) {
         return prisma.process.findUnique({
             where: { id },
-            include: { subProcesses: true, area: true }
+            include: { children: true, area: true }
         });
     }
 

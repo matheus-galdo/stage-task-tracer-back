@@ -15,7 +15,7 @@ export default class AreaService {
     }
 
     public findAreaById(id: number) {
-        return this.areaRepository.findAreaWithProcess(id);
+        return this.areaRepository.findAreaWithRootProcesses(id);
     }
 
     public create(area: Area){

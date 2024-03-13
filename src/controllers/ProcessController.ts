@@ -26,9 +26,17 @@ export default class ProcessController {
         return res.send(processs);
     }
 
-    public async create(req: Request, res: Response) {
+    public async createRoot(req: Request, res: Response) {
         const process = req.body as Process;
-        const processCreated = await this.processService.create(process);
+        const processCreated = await this.processService.createRootProcess(process);
+        return res.send(processCreated);
+    }
+
+    public async createChild(req: Request, res: Response) {
+        const process = req.body as Process;
+        const id = Number(req.params.id);
+
+        const processCreated = await this.processService.createChildProcess(id, process);
         return res.send(processCreated);
     }
 
